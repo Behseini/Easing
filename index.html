@@ -1,0 +1,73 @@
+Creating Easing With CSS
+
+http://matthewlein.com/ceaser/
+
+
+$('#narrow').on('click', function(){
+  $('#left').toggleClass("col-md-3 col-md-1");
+  $('#right').toggleClass("col-md-9 col-md-11");
+  
+ // var colWidth = $('#left').width();
+//alert(colWidth);
+
+});
+
+$('#wide').on('click', function(){
+  $('#left').toggleClass("col-md-1 col-md-3");
+  $('#right').toggleClass("col-md-11 col-md-9");
+  
+   //var colWidth = $('#left').width();
+//alert(colWidth);
+
+
+});
+
+
+
+/* CSS used here will be applied after bootstrap.css */
+
+#left{background-color:red;
+-webkit-transition: all 500ms cubic-bezier(0.075, 0.820, 0.165, 1.000); 
+   -moz-transition: all 500ms cubic-bezier(0.075, 0.820, 0.165, 1.000); 
+     -o-transition: all 500ms cubic-bezier(0.075, 0.820, 0.165, 1.000); 
+        transition: all 500ms cubic-bezier(0.075, 0.820, 0.165, 1.000); /* easeOutCirc */
+
+-webkit-transition-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000); 
+   -moz-transition-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000); 
+     -o-transition-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000); 
+        transition-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000); /* easeOutCirc */
+
+}
+#right{background-color:yellow;
+-webkit-transition: all 500ms cubic-bezier(0.075, 0.820, 0.165, 1.000); 
+   -moz-transition: all 500ms cubic-bezier(0.075, 0.820, 0.165, 1.000); 
+     -o-transition: all 500ms cubic-bezier(0.075, 0.820, 0.165, 1.000); 
+        transition: all 500ms cubic-bezier(0.075, 0.820, 0.165, 1.000); /* easeOutCirc */
+
+-webkit-transition-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000); 
+   -moz-transition-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000); 
+     -o-transition-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000); 
+        transition-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000); /* easeOutCirc */
+
+}
+
+.row {
+  margin-left: 0;
+  margin-right: 0;
+  [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.row-no-padding2 {
+  [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+
+
+
+
