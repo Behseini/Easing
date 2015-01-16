@@ -1,0 +1,27 @@
+<?php
+     global $post;
+     $thumbnail_ID = get_post_thumbnail_id();
+      $post_id = get_the_ID();
+     $images = get_children( array('post_parent' => $post_id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID') );
+     print_r( $images );
+     if ($images) :
+ 
+         foreach ($images as $attachment_id => $image) :
+ 
+         if ( $image->ID != $thumbnail_ID ) :
+ 
+             $img_alt = get_post_meta($attachment_id, '_wp_attachment_image_alt', true); //alt
+             if ($img_alt == '') : $img_alt = $image->post_title; endif;
+ 
+             $big_array = image_downsize( $image->ID, 'large' );
+             $img_url = $big_array[0];
+ 
+             echo '<li>';
+             echo '<img src="';
+             echo $img_url;
+             echo '" alt="';
+             echo $img_alt;
+             echo '" />';
+             echo '</li><!--end slide-->';
+ 
+     endif; endforeach; endif;
