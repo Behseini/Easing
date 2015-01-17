@@ -1,0 +1,85 @@
+<?php
+    while ( have_posts() ) : the_post();
+        if ( get_post_gallery() ) :
+            $gallery = get_post_gallery( get_the_ID(), false );
+            foreach( $gallery['src'] AS $src )
+            {
+                ?>
+                 <img src="<?php echo $src; ?>" class="my-custom-class" alt="Gallery image" />
+                <?php
+            }
+        endif;
+    endwhile;
+?>
+
+$args = array(
+'post_type' => 'attachment',
+'post_mime_type' => 'image',
+'post_parent' => $post->ID
+);
+$images = get_posts( $args );
+foreach($images as $image): ?>
+<a rel="lightbox" href="<?php echo wp_get_attachment_url($image->ID); ?>" title="<?php echo wp_specialchars( get_the_title($image->ID), 1 ) ?>"><?php echo wp_get_attachment_image($image->ID, 'medium' ); ?></a>
+<?php endforeach;
+
+
+
+foreach(get_images_src() as $k => $i){
+echo '<img src="'.$i[0].'" width="'.$i[1].'" height="'.$i[2].'" />';
+}
+?>
+
+
+<?php
+
+echo "salam";
+
+
+global $post;
+ 
+	$thumbnail_ID = get_post_thumbnail_id();
+ 
+	$images = get_children( array('post_parent' => $post_id, 'post_type' => 'attachment', 'post_mime_type' => 'image') );
+ 
+//$images = array(
+//'post_type' => 'attachment',
+//'post_mime_type' => 'image',
+//'post_parent' => $post->ID
+//);
+
+	if ($images) :
+		echo '<div class="gallery">';
+ 
+		foreach ($images as $attachment_id => $image) :
+ 
+		if ( $image->ID != $thumbnail_ID ) :
+ 
+			$img_title = $image->post_title;   // title.
+			$img_caption = $image->post_excerpt; // caption.
+			$img_description = $image->post_content; // description.
+ 
+			$img_alt = get_post_meta($attachment_id, '_wp_attachment_image_alt', true); //alt
+			if ($img_alt == '') : $img_alt = $img_title; endif;
+ 
+			$big_array = image_downsize( $image->ID, 'large' );
+	 		$img_url = $big_array[0];
+ 
+			?>
+ 
+			<div class="slide">
+				<div  class="description">
+					<p class="title"><strong><?php echo $img_title; ?></strong></p>
+					<?php if ($img_caption) : echo wpautop($img_caption, 'caption'); endif; ?>
+					<?php if ($img_description) : echo wpautop($img_description); endif; ?>
+				</div>
+				<div class="image">
+					<p><img src="<?php echo $img_url; ?>" alt="<?php echo $img_alt; ?>" title="<?php echo $img_title; ?>" /></p>
+				</div>
+			</div>
+ 
+		<?php endif; ?>
+		<?php endforeach; ?>
+		</div><!-- End gallery -->
+	<?php endif;
+
+http://revelationconcept.com/wordpress-display-all-post-attachment-images-in-a-slider/#comments
